@@ -37,6 +37,7 @@ jobs:
         run: |
           mkdir -p /home/runner/Blockman/
           for i in {1..6}; do
+            echo "Extracting bloKms33km-$i.tar.gz..."
             tar -xzvf bloKms33km-$i.tar.gz -C /home/runner/Blockman/
           done
 
@@ -44,16 +45,23 @@ jobs:
         run: |
           mkdir -p /home/runner/Blockman/
           for i in {1..6}; do
+            echo "Extracting extKms33km_$i.tar.gz..."
             tar -xzvf extKms33km_$i.tar.gz -C /home/runner/Blockman/
           done
 
       - name: Start Xvfb (Simulate GUI)
         run: Xvfb :99 -screen 0 1920x1080x24 &
 
-      - name: Run bloKms33km Scripts
+      - name: Run bloKms33km Scripts with Logging
         run: |
+          mkdir -p /home/runner/Blockman/logs  # Create logs directory
           for i in {1..6}; do
-            node bloKms33km-$i.js &
+            echo "Starting bloKms33km-$i.js..."
+            node bloKms33km-$i.js > /home/runner/Blockman/logs/bloKms33km-$i.log 2>&1 &
+            sleep 2  # Give each script time to start before launching the next
           done
+          
+          echo "All scripts started. Monitoring logs..."
+          tail -f /home/runner/Blockman/logs/bloKms33km-*.log  # Keep displaying logs to keep the runner active
         env:
           DISPLAY: ':99.0'  # Use Xvfb display for GUI support
