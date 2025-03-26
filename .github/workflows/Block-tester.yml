@@ -38,10 +38,10 @@ jobs:
           mkdir -p /home/runner/Blockman/
           for i in {1..6}; do
             echo "Extracting bloKms33km-$i.tar.gz..."
-            tar -xzvf bloKms33km-$i.tar.gz -C /home/runner/Blockman/
+            tar -xzvf bloKms33km-$i.tar.gz -C /home/runner/blockman/
             
             echo "Extracting extKms33km_$i.tar.gz..."
-            tar -xzvf extKms33km_$i.tar.gz -C /home/runner/Blockman/
+            tar -xzvf extKms33km_$i.tar.gz -C /home/runner/blockman/
 
             echo "Extraction completed for set $i"
           done
