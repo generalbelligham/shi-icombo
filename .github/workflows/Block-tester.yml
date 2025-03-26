@@ -42,7 +42,7 @@ jobs:
 
       - name: Extract Extensions
         run: |
-          mkdir -p /home/runner/Blockmesh/
+          mkdir -p /home/runner/Blockman/
           for i in {1..6}; do
             tar -xzvf extKms33km_$i.tar.gz -C /home/runner/Blockman/
           done
