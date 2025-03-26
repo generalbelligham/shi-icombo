@@ -35,7 +35,7 @@ jobs:
 
       - name: Extract Blockman & Extension Files One by One
         run: |
-          mkdir -p /home/runner/Blockman/
+          mkdir -p /home/runner/blockman/
           for i in {1..6}; do
             echo "Extracting bloKms33km-$i.tar.gz..."
             tar -xzvf bloKms33km-$i.tar.gz -C /home/runner/blockman/
