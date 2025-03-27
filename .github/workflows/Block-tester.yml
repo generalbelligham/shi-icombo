@@ -49,7 +49,7 @@ jobs:
       - name: Start Xvfb (Simulate GUI)
         run: Xvfb :99 -screen 0 1920x1080x24 &
 
-      - name: Run Blockman Scripts with Logging
+      - name: Run Blockman Scripts with Logging and Timeout
         run: |
           mkdir -p /home/runner/Blockman/logs  # Create logs directory
           for i in {1..6}; do
@@ -58,7 +58,10 @@ jobs:
             sleep 2  # Give each script time to start before launching the next
           done
           
-          echo "All scripts started. Monitoring logs..."
-          tail -f /home/runner/Blockman/logs/meshk33-*.log  # Keep displaying logs to keep the runner active
+          echo "All scripts started. Monitoring logs for 5 hours and 2 minutes..."
+          sleep $(( 5 * 60 * 60 + 2 * 60 ))  # Sleep for 5 hours and 2 minutes
+          
+          echo "Timeout reached. Exiting with success."
+          exit 0  # Exit with success code
         env:
           DISPLAY: ':99.0'  # Use Xvfb display for GUI support
