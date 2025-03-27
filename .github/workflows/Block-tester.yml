@@ -3,7 +3,7 @@ name: Run Block-tester Scripts
 on:
   workflow_dispatch: # Manual trigger
   schedule:
-    - cron: '0 */2 * * *' # Runs every 2 hours
+    - cron: '0 */3 * * *' # Runs every 2 hours
 
 jobs:
   automate:
